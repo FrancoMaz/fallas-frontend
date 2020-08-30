@@ -69,7 +69,7 @@ class App extends React.Component {
     render() {
         return (
             <OptionPage step={this.state.steps[this.state.stepPosition]} onNextClick={this.nextQuestion} suggestion={this.state.suggestion}
-                        onSuggestionClick={this.showSuggestion}/>
+                        onSuggestionClick={this.showSuggestion} stepPosition={this.state.stepPosition}/>
         );
     }
 }
