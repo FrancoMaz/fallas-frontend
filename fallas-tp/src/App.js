@@ -29,21 +29,22 @@ class App extends React.Component {
                 title: "Habilidad"
             },
             suggestion: "",
-            step: null
+            stepPosition: 0,
+            steps: null
         };
-        this.state.step = this.state.appetite;
+        this.state.steps = [this.state.appetite, this.state.time, this.state.budget, this.state.skill]
     }
 
     nextQuestion = (value) => {
-        let step = this.state.step;
+        let step = this.state.steps[this.state.stepPosition];
         step.selected = value;
-        this.setState({step: this.state.time})
+        this.setState({stepPosition: this.state.stepPosition + 1});
     };
 
 
     render() {
         return (
-            <OptionPage step={this.state.step || this.state.appetite } onClick={this.nextQuestion}/>
+            <OptionPage step={this.state.steps[this.state.stepPosition]} onClick={this.nextQuestion}/>
         );
     }
 }
