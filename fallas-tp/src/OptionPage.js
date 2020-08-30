@@ -14,10 +14,17 @@ class OptionPage extends React.Component {
         this.setState({selectedOption: value})
     };
 
+    showSuggestionButton = () => {
+        if (this.props.suggestion !== "") {
+            return <button className="suggestion-button" onClick={this.props.onSuggestionClick}>Consultar sugerencia</button>
+        }
+        return "";
+    };
+
     render() {
         let options = this.props.step.options;
         let title = this.props.step.title;
-        let onClick = this.props.onClick;
+        let onNextClick = this.props.onNextClick;
         return (
             <div className="options">
                 <div className="title">{title}</div>
@@ -31,7 +38,8 @@ class OptionPage extends React.Component {
                         </div>
                     )
                 })}
-                <button className="next-button" onClick={() => onClick(this.state.selectedOption)}>Siguiente</button>
+                <button className="next-button" onClick={() => onNextClick(this.state.selectedOption)}>Siguiente</button>
+                {this.showSuggestionButton}
             </div>
 
         );
