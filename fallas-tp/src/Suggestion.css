@@ -1,3 +1,5 @@
 .suggestion {
     margin-top: 150px;
+    border: solid 2px;
+    padding-top: 13px;
 }

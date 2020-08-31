@@ -79,6 +79,9 @@ class App extends React.Component {
     };
 
     showSuggestion = () => {
+        if (this.state.stepPosition === 3) {
+            this.setState({stepPosition: this.state.stepPosition + 1})
+        }
         this.setState({showSuggestion: true})
     };
 

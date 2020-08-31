@@ -37,28 +37,42 @@ class OptionPage extends React.Component {
       }
     };
 
+    showOptions = () => {
+        if (this.props.stepPosition <= 3) {
+            let options = this.props.step.options;
+            let title = this.props.step.title;
+            return (
+                <div className="optionsGiven">
+                    <div className="title">{title}</div>
+                    <div className="options">
+                        {options.map(option => {
+                            return (
+                                <div key={option} className="option">
+                                    <label>{option}</label>
+                                    <input type="radio" name={title} value={option}
+                                           checked={this.state.selectedOption === option}
+                                           onChange={() => {
+                                               this.handleOptionChange(option)
+                                           }}/>
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <div className="buttons">
+                        {this.showNextButton()}
+                        {this.showSuggestionButton()}
+                    </div>
+                </div>
+            )
+        }
+        return "";
+    };
+
     render() {
-        let options = this.props.step.options;
-        let title = this.props.step.title;
+
         return (
             <div className="optionPage">
-                <div className="title">{title}</div>
-                <div className="options">
-                    {options.map(option => {
-                        return (
-                            <div key={option} className="option">
-                                <label>{option}</label>
-                                <input type="radio" name={title} value={option}
-                                       checked={this.state.selectedOption === option}
-                                       onChange={() => { this.handleOptionChange(option)}}/>
-                            </div>
-                        )
-                    })}
-                </div>
-                <div className="buttons">
-                    {this.showNextButton()}
-                    {this.showSuggestionButton()}
-                </div>
+                {this.showOptions()}
                 {this.showSuggestion()}
             </div>
 
