@@ -8,9 +8,9 @@ class Suggestion extends React.Component {
 
     render() {
         return (
-            <div class="suggestion">
-                <div class="title">{this.props.key}</div>
-                <div class="photo"/>
+            <div className="suggestion">
+                <div className="title">{this.props.food.name}</div>
+                <img src={require('./images/' + this.props.food.file)} />
             </div>
         )
     }

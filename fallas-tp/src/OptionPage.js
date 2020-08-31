@@ -1,5 +1,6 @@
 import React from 'react';
 import './OptionPage.css';
+import Suggestion from "./Suggestion";
 
 class OptionPage extends React.Component {
 
@@ -15,8 +16,8 @@ class OptionPage extends React.Component {
     };
 
     showSuggestionButton = () => {
-        if (this.props.suggestion !== "") {
-            return <button className="suggestion-button" onClick={this.props.onSuggestionClick}>Consultar sugerencia</button>
+        if (this.props.suggestion.title !== "" && this.props.file !== "") {
+            return <button className="suggestion-button" onClick={() => this.props.onSuggestionClick()}>Consultar sugerencia</button>
         }
         return "";
     };
@@ -28,6 +29,12 @@ class OptionPage extends React.Component {
                            onClick={() => onNextClick(this.state.selectedOption)}>Siguiente</button>
         }
         return "";
+    };
+
+    showSuggestion = () => {
+      if (this.props.showSuggestion) {
+          return <Suggestion food={this.props.suggestion}/>
+      }
     };
 
     render() {
@@ -48,6 +55,7 @@ class OptionPage extends React.Component {
                 })}
                 {this.showNextButton()}
                 {this.showSuggestionButton()}
+                {this.showSuggestion()}
             </div>
 
         );

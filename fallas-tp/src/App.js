@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import OptionPage from "./OptionPage";
-import Suggestion from "./Suggestion";
 
 class App extends React.Component {
 
@@ -29,10 +28,18 @@ class App extends React.Component {
                 selected: null,
                 title: "Habilidad"
             },
-            suggestion: "",
+            suggestion: {
+                title: "",
+                file: ""
+            },
             stepPosition: 0,
-            steps: null
+            steps: null,
+            possibleSuggestions: [{key: "Omellette", name: "Omelette de atún", file: "omelette.jpeg"}, {key: "Pollo", name: "Pollo", file: "pollo.jpeg"},
+                {key: "Milanesa", name: "Milanesa de carne", file: "milanesa.jpg"}, {key: "Noquis", name: "Ñoquis de papa", file:"noquis.jpg"},
+                {key: "Tarta", name: "Tarta de espinaca", file: "tarta.png"}],
+            showSuggestion: false
         };
+
         this.state.steps = [this.state.appetite, this.state.time, this.state.budget, this.state.skill]
     }
 
@@ -51,25 +58,35 @@ class App extends React.Component {
                 budget: this.state.budget.selected !== null ? this.state.budget.options.indexOf(this.state.budget.selected) + 1 : null,
                 skill: this.state.skill.selected !== null ? this.state.skill.options.indexOf(this.state.skill.selected) + 1 : null
             })
-        });
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                let sug;
+                this.state.possibleSuggestions.forEach(suggestion => {
+                    if (suggestion.key === response.suggestion) {
+                        sug = suggestion;
+                    }
+                });
+                this.setState({suggestion: {name: sug.title, file: sug.file} });
+            })
     };
 
     nextQuestion = (value) => {
         let step = this.state.steps[this.state.stepPosition];
         step.selected = value;
-        this.setState({stepPosition: this.state.stepPosition + 1});
+        this.setState({stepPosition: this.state.stepPosition + 1, showSuggestion: false});
         this.requestSuggestion();
     };
 
     showSuggestion = () => {
-        return <Suggestion key={this.state.suggestion}/>
+        this.setState({showSuggestion: true})
     };
 
 
     render() {
         return (
             <OptionPage step={this.state.steps[this.state.stepPosition]} onNextClick={this.nextQuestion} suggestion={this.state.suggestion}
-                        onSuggestionClick={this.showSuggestion} stepPosition={this.state.stepPosition}/>
+                        onSuggestionClick={this.showSuggestion} stepPosition={this.state.stepPosition} showSuggestion={this.state.showSuggestion}/>
         );
     }
 }
