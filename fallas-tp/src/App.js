@@ -67,7 +67,7 @@ class App extends React.Component {
                         sug = suggestion;
                     }
                 });
-                this.setState({suggestion: {name: sug.title, file: sug.file} });
+                this.setState({suggestion: {title: sug.name, file: sug.file} });
             })
     };
 

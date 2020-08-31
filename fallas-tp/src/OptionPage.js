@@ -41,20 +41,24 @@ class OptionPage extends React.Component {
         let options = this.props.step.options;
         let title = this.props.step.title;
         return (
-            <div className="options">
+            <div className="optionPage">
                 <div className="title">{title}</div>
-                {options.map(option => {
-                    return (
-                        <div key={option} className="column">
-                            <label>{option}</label>
-                            <input type="radio" name={title} value={option}
-                                   checked={this.state.selectedOption === option}
-                                   onChange={() => { this.handleOptionChange(option)}}/>
-                        </div>
-                    )
-                })}
-                {this.showNextButton()}
-                {this.showSuggestionButton()}
+                <div className="options">
+                    {options.map(option => {
+                        return (
+                            <div key={option} className="option">
+                                <label>{option}</label>
+                                <input type="radio" name={title} value={option}
+                                       checked={this.state.selectedOption === option}
+                                       onChange={() => { this.handleOptionChange(option)}}/>
+                            </div>
+                        )
+                    })}
+                </div>
+                <div className="buttons">
+                    {this.showNextButton()}
+                    {this.showSuggestionButton()}
+                </div>
                 {this.showSuggestion()}
             </div>
 

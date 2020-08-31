@@ -1,0 +1,26 @@
+.optionPage {
+    text-align: center;
+    padding-top: 60px;
+}
+
+.title {
+    font-size: 32px;
+    padding-bottom: 24px;
+}
+
+.option {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.options {
+    margin-left: 5px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.suggestion-button {
+    margin-left: 15px;
+}
