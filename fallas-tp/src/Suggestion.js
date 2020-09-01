@@ -11,7 +11,8 @@ class Suggestion extends React.Component {
         return (
             <div className="suggestion">
                 <div className="title">{this.props.food.title}</div>
-                <img src={require('./images/' + this.props.food.file)} />
+                <a className="link" href={this.props.food.link} target="_blank">Link a receta</a>
+                <img className="image" src={require('./images/' + this.props.food.file)}/>
             </div>
         )
     }

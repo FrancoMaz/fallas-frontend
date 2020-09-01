@@ -3,3 +3,12 @@
     border: solid 2px;
     padding-top: 13px;
 }
+
+.link {
+    cursor: pointer;
+    color: dodgerblue;
+}
+
+.image {
+    margin-top: 15px;
+}

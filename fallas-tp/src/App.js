@@ -30,13 +30,17 @@ class App extends React.Component {
             },
             suggestion: {
                 title: "",
-                file: ""
+                file: "",
+                link: ""
             },
             stepPosition: 0,
             steps: null,
-            possibleSuggestions: [{key: "Omellette", name: "Omelette de atún", file: "omelette.jpeg"}, {key: "Pollo", name: "Pollo", file: "pollo.jpeg"},
-                {key: "Milanesa", name: "Milanesa de carne", file: "milanesa.jpg"}, {key: "Noquis", name: "Ñoquis de papa", file:"noquis.jpg"},
-                {key: "Tarta", name: "Tarta de espinaca", file: "tarta.png"}],
+            possibleSuggestions: [
+                {key: "Omellette", name: "Omelette de atún", file: "omelette.jpeg", link: "https://vancamps.com.co/recetas-con-atun/omelette-con-atun"},
+                {key: "Pollo", name: "Pollo", file: "pollo.jpeg", link: "https://www.cocinacaserayfacil.net/pollo-al-horno-con-patatas-y-cebolla/"},
+                {key: "Milanesa", name: "Milanesa de carne", file: "milanesa.jpg", link: "https://www.paulinacocina.net/como-hacer-milanesas-receta-y-trucos-imperdibles/5303"},
+                {key: "Noquis", name: "Ñoquis de papa", file:"noquis.jpg", link: "https://www.paulinacocina.net/receta-de-noquis-del-29-super-faciles/12020"},
+                {key: "Tarta", name: "Tarta de espinaca", file: "tarta.png", link: "https://www.paulinacocina.net/tarta-de-espinaca/3013"}],
             showSuggestion: false,
             history: []
         };
@@ -68,7 +72,7 @@ class App extends React.Component {
                         sug = suggestion;
                     }
                 });
-                this.setState({suggestion: {title: sug.name, file: sug.file} });
+                this.setState({suggestion: {title: sug.name, file: sug.file, link: sug.link} });
             })
     };
 
