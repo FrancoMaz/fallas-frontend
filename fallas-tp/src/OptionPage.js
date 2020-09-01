@@ -17,7 +17,7 @@ class OptionPage extends React.Component {
 
     showSuggestionButton = () => {
         if (this.props.suggestion.title !== "" && this.props.file !== "") {
-            return <button className="suggestion-button" onClick={() => this.props.onSuggestionClick()}>Consultar sugerencia</button>
+            return <button className="suggestion-button" onClick={() => this.props.onSuggestionClick(this.state.selectedOption)}>Consultar sugerencia</button>
         }
         return "";
     };
@@ -68,10 +68,27 @@ class OptionPage extends React.Component {
         return "";
     };
 
+    showHistory = () => {
+        let history = this.props.history;
+
+        return (
+            <ul className="history">
+                {history.map(element => {
+                    return (
+                        <li className="feature">
+                            {element.feature}: {element.selectedOption}
+                        </li>
+                    )
+                })}
+            </ul>
+      )
+    };
+
     render() {
 
         return (
             <div className="optionPage">
+                {this.showHistory()}
                 {this.showOptions()}
                 {this.showSuggestion()}
             </div>

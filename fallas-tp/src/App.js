@@ -37,7 +37,8 @@ class App extends React.Component {
             possibleSuggestions: [{key: "Omellette", name: "Omelette de atún", file: "omelette.jpeg"}, {key: "Pollo", name: "Pollo", file: "pollo.jpeg"},
                 {key: "Milanesa", name: "Milanesa de carne", file: "milanesa.jpg"}, {key: "Noquis", name: "Ñoquis de papa", file:"noquis.jpg"},
                 {key: "Tarta", name: "Tarta de espinaca", file: "tarta.png"}],
-            showSuggestion: false
+            showSuggestion: false,
+            history: []
         };
 
         this.state.steps = [this.state.appetite, this.state.time, this.state.budget, this.state.skill]
@@ -74,13 +75,19 @@ class App extends React.Component {
     nextQuestion = (value) => {
         let step = this.state.steps[this.state.stepPosition];
         step.selected = value;
-        this.setState({stepPosition: this.state.stepPosition + 1, showSuggestion: false});
+        let history = this.state.history;
+        history.push({feature: step.title, selectedOption: value});
+        this.setState({stepPosition: this.state.stepPosition + 1, showSuggestion: false, history: history});
         this.requestSuggestion();
     };
 
-    showSuggestion = () => {
+    showSuggestion = (value) => {
         if (this.state.stepPosition === 3) {
-            this.setState({stepPosition: this.state.stepPosition + 1})
+            this.requestSuggestion();
+            let step = this.state.steps[this.state.stepPosition];
+            let history = this.state.history;
+            history.push({feature: step.title, selectedOption: value});
+            this.setState({stepPosition: this.state.stepPosition + 1, history: history});
         }
         this.setState({showSuggestion: true})
     };
@@ -89,7 +96,8 @@ class App extends React.Component {
     render() {
         return (
             <OptionPage step={this.state.steps[this.state.stepPosition]} onNextClick={this.nextQuestion} suggestion={this.state.suggestion}
-                        onSuggestionClick={this.showSuggestion} stepPosition={this.state.stepPosition} showSuggestion={this.state.showSuggestion}/>
+                        onSuggestionClick={this.showSuggestion} stepPosition={this.state.stepPosition} showSuggestion={this.state.showSuggestion}
+                        history={this.state.history}/>
         );
     }
 }

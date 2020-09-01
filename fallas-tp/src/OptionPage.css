@@ -24,3 +24,7 @@
 .suggestion-button {
     margin-left: 15px;
 }
+
+.history {
+    list-style: none;
+}
