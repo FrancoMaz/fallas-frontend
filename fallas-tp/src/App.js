@@ -51,7 +51,7 @@ class App extends React.Component {
     requestSuggestion = () => {
 
 
-        fetch('http://localhost:5000/', {
+        fetch('http://localhost:5000/fallas2', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
