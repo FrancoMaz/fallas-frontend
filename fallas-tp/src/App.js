@@ -87,8 +87,9 @@ class App extends React.Component {
 
     showSuggestion = (value) => {
         if (this.state.stepPosition === 3) {
-            this.requestSuggestion();
             let step = this.state.steps[this.state.stepPosition];
+            step.selected = value;
+            this.requestSuggestion();
             let history = this.state.history;
             history.push({feature: step.title, selectedOption: value});
             this.setState({stepPosition: this.state.stepPosition + 1, history: history});
